@@ -1,8 +1,8 @@
 {
-  "name": "super-ops-web",
-  "version": "4.4.0",
-  "description": "Super OPS operation platform",
-  "author": "SuperOPS <superops.aliyun.com>",
+  "name": "pgoops_web_www.pgoops.com",
+  "version": "1.0.0",
+  "description": "pgoops operation platform, www.pgoops.com",
+  "author": "pgoops <pgoops.aliyun.com>",
   "scripts": {
     "dev": "vue-cli-service serve --port 8080",
     "build": "vue-cli-service build",
