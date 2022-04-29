@@ -1,0 +1,52 @@
+<template>
+  <div class="container">
+    <router-view />
+  </div>
+</template>
+<script>
+export default {
+  name: '',
+  data() {
+    return {
+
+    }
+  },
+  created() {
+  },
+  methods: {
+  }
+}
+</script>
+<style lang="scss" scoped>
+::v-deep .el-table th {
+    text-align: center;
+    font-weight: bold;
+    color: #606266;
+    background-color:#EBEEF5;
+}
+::v-deep .el-table--border, .el-table--group {
+    border: 1px solid #DCDFE6;
+}
+::v-deep .el-table--border td, .el-table--border th, .el-table__body-wrapper .el-table--border.is-scrolling-left~.el-table__fixed {
+    border-right: 1px solid #DCDFE6;
+}
+::v-deep .el-table td, .el-table th.is-leaf {
+    border-bottom: 1px solid #DCDFE6;
+}
+::v-deep .el-table .el-table__header-wrapper .el-table__header th.is-leaf {
+    border-bottom: 1px solid #DCDFE6;
+    border-right: 1px solid #DCDFE6;
+}
+::v-deep .el-table--border th, .el-table__fixed-right-patch {
+    border-bottom: 1px solid #DCDFE6 !important;
+}
+::v-deep .el-card__header {
+    background: rgb(217, 236, 255);
+}
+::v-deep .el-table th>.cell{
+        display: inline-block;
+        white-space: nowrap;
+        word-break: keep-all;
+        text-overflow: unset;
+}
+</style>
