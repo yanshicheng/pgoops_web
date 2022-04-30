@@ -79,6 +79,250 @@ export const constantRoutes = [
       }
     ]
   }
+  // {
+  //   path: '/alert',
+  //   component: Layout,
+  //   // redirect: '/cmdb/acces-center',
+  //   alwaysShow: true, // will always show the root menu
+  //   name: 'Alert',
+  //   meta: {
+  //     title: 'Alert',
+  //     icon: 'asset',
+  //     roles: ['admin']
+  //   },
+  //   children: [
+  //     {
+  //       path: 'host',
+  //       component: () => import('@/views/alert/host/index'),
+  //       name: 'AletrHost',
+  //
+  //       meta: {
+  //         title: '主机管理',
+  //         roles: ['admin'],
+  //         icon: 'asset'
+  //       }
+  //     },
+  //     {
+  //       path: 'history',
+  //       component: () => import('@/views/alert/history/index'),
+  //       name: 'AlertHistory',
+  //       meta: {
+  //         title: '告警历史',
+  //         roles: ['admin'],
+  //         icon: 'asset'
+  //       }
+  //     },
+  //     {
+  //       path: 'history/detail',
+  //       component: () => import('@/views/alert/history/components/detail'),
+  //       hidden: true,
+  //       name: 'AlertHistoryDetail',
+  //       meta: {
+  //         title: '告警详情',
+  //         roles: ['admin'],
+  //         icon: 'asset'
+  //       }
+  //     }]
+  // },
+  // {
+  //   path: '/message-center',
+  //   component: Layout,
+  //   // redirect: '/cmdb/acces-center',
+  //   alwaysShow: true, // will always show the root menu
+  //   name: 'MESSAGE_CENTER',
+  //   meta: {
+  //     title: '消息中心',
+  //     icon: 'asset',
+  //     roles: ['admin']
+  //   },
+  //   children: [
+  //     {
+  //       path: 'history',
+  //       component: () => import('@/views/message_center/history/index'),
+  //       name: 'MESSAGE_CENTER_HISTORY',
+  //       meta: {
+  //         title: '消息历史',
+  //         roles: ['admin'],
+  //         icon: 'asset'
+  //       }
+  //     },
+  //     {
+  //       path: 'level',
+  //       component: () => import('@/views/message_center/level/index'),
+  //       name: 'MESSAGE_CENTER_LEVEL',
+  //       meta: {
+  //         title: '通知等级',
+  //         roles: ['admin'],
+  //         icon: 'asset'
+  //       }
+  //     },
+  //     {
+  //       path: 'provider',
+  //       component: () => import('@/views/message_center/provider/index'),
+  //       name: 'MESSAGE_CENTER_PROVIDER',
+  //       meta: {
+  //         title: '媒介中心',
+  //         roles: ['admin'],
+  //         icon: 'asset'
+  //       }
+  //     },
+  //     {
+  //       path: 'group',
+  //       component: () => import('@/views/message_center/group/index'),
+  //       name: 'MESSAGE_CENTER_GROUP',
+  //       meta: {
+  //         title: '通知组',
+  //         roles: ['admin'],
+  //         icon: 'asset'
+  //       }
+  //     },
+  //     {
+  //       path: 'history/detail',
+  //       component: () => import('@/views/message_center/history/components/detail'),
+  //       name: 'MESSAGE_CENTER_HISTORY_DETAIL',
+  //       hidden: true,
+  //       meta: {
+  //         title: '历史详情',
+  //         roles: ['admin'],
+  //         icon: 'asset'
+  //       }
+  //     }
+  //   ]
+  // }
+  //     {
+  //       path: 'minion',
+  //       component: () => import('@/views/task/minion/index'),
+  //       name: 'TashMinion',
+  //       meta: {
+  //         title: '认证管理',
+  //         roles: ['admin'],
+  //         icon: 'asset'
+  //       }
+  //     },
+  //     {
+  //       path: 'history',
+  //       component: () => import('@/views/task/history/index'),
+  //       name: 'TashHistory',
+  //       meta: {
+  //         title: '执行历史',
+  //         roles: ['admin'],
+  //         icon: 'asset'
+  //       }
+  //     },
+  //     {
+  //       path: 'token',
+  //       component: () => import('@/views/task/token/index'),
+  //       name: 'TaskToken',
+  //       meta: {
+  //         title: '凭证',
+  //         roles: ['admin'],
+  //         icon: 'asset'
+  //       }
+  //     },
+  //     {
+  //       path: 'history/detail',
+  //       component: () => import('@/views/task/history/components/detail'),
+  //       name: 'TashHistoryDetail',
+  //       meta: {
+  //         title: '历史详情',
+  //         roles: ['admin'],
+  //         icon: 'asset'
+  //       }
+  //     }
+  //   ]
+  // }
+  // {
+  //   path: '/permissions',
+  //   component: Layout,
+  //   alwaysShow: true, // will always show the root menu
+  //   name: 'PermissionS',
+  //   order: 1,
+  //   meta: {
+  //     title: '权限管理',
+  //     icon: 'lock',
+  //     roles: ['admin'] // you can set roles in root nav
+  //   },
+  //   children: [
+  //     {
+  //       path: 'roless',
+  //       component: () => import('@/views/permission/roles/index'),
+  //       name: 'RolesPermission',
+  //       meta: {
+  //         title: '角色管理',
+  //         roles: ['admin'], // or you can only set roles in sub nav
+  //         icon: 'user-roless'
+  //       }
+  //     },
+  //     {
+  //       path: 'directive',
+  //       component: () => import('@/views/permission/rules/index'),
+  //       name: 'DirectivePermissions',
+  //       meta: {
+  //         title: 'API权限',
+  //         roles: ['admin'],
+  //         icon: 'roles'
+  //         // if do not set roles, means: this page does not require permission
+  //       }
+  //     },
+  //     {
+  //       path: 'menus',
+  //       component: () => import('@/views/permission/menus/index'),
+  //       name: 'MenusPermissions',
+  //       meta: {
+  //         title: '菜单权限',
+  //         roles: ['admin'],
+  //         icon: 'menu'
+  //       }
+  //     }
+  //   ]
+  // }
+  /** when your routing map is too long, you can split it into small modules **/
+  // {
+  //   path: '/user',
+  //   component: Layout,
+  //   redirect: '/user/personal-center',
+  //   alwaysShow: true, // will always show the root menu
+  //   name: 'user',
+  //   meta: {
+  //     title: '用户中心',
+  //     icon: 'user',
+  //     roles: ['admin'] // you can set roles in root nav
+  //   },
+  //   children: [
+  //     {
+  //       path: 'personal-center',
+  //       component: () => import('@/views/users/personal-center'),
+  //       name: 'user-info',
+  //       meta: {
+  //         title: '个人中心',
+  //         roles: ['admin'], // or you can only set roles in sub nav
+  //         icon: 'user-center'
+  //       }
+  //     },
+  //     {
+  //       path: 'department',
+  //       component: () => import('@/views/users/department'),
+  //       name: 'department',
+  //       meta: {
+  //         title: '部门管理',
+  //         roles: ['admin'],
+  //         icon: 'department'
+  //         // if do not set roles, means: this page does not require permission
+  //       }
+  //     },
+  //     {
+  //       path: 'user-management',
+  //       component: () => import('@/views/users/user-management'),
+  //       name: 'user-management',
+  //       meta: {
+  //         title: '用户管理',
+  //         roles: ['admin'],
+  //         icon: 'management'
+  //       }
+  //     }
+  //   ]
+  // },
+
 ]
 
 /**

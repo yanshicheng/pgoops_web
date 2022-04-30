@@ -128,7 +128,7 @@
         />
       </div>
     </el-card>
-    <el-dialog :title="repwd_title + name" :visible.sync="resetPasswordForm" width="40%" :close-on-click-modal="false">
+    <el-dialog :title="repwd_title + name" :visible.sync="resetPasswordForm" width="40%" :close-on-click-modal="false" @close="handleDownFormVisible('repedRef')">
       <el-form ref="repedRef" :model="resetPassword" :rules="repwd">
         <el-form-item label="新密码" label-width="80px" prop="new_password">
           <el-input v-model="resetPassword.new_password" autocomplete="off" show-password />
@@ -138,12 +138,12 @@
         </el-form-item>
       </el-form>
       <div slot="footer" class="dialog-footer">
-        <el-button @click="handleDownFormVisible">取 消</el-button>
+        <el-button @click="handleDownFormVisible('repedRef')">取 消</el-button>
         <el-button type="primary" @click="postResetPassword">确 定</el-button>
       </div>
 
     </el-dialog>
-    <el-dialog :title="textMap[dialogStatus]" :visible.sync="dialogFormVisible" width="40%" :close-on-click-modal="false">
+    <el-dialog :title="textMap[dialogStatus]" :visible.sync="dialogFormVisible" width="40%" :close-on-click-modal="false" @close="handleDownFormVisible('createUser')">
       <el-form ref="createUser" :model="tempData" :rules="rules" class="el-form">
         <el-form-item label="姓名" label-width="80px" prop="name" style="width: 300px">
           <el-input v-model="tempData.name" />
@@ -195,7 +195,7 @@
         </el-form-item>
       </el-form>
       <div slot="footer" class="dialog-footer">
-        <el-button @click="handleDownFormVisible()">取 消</el-button>
+        <el-button @click="handleDownFormVisible('createUser')">取 消</el-button>
         <el-button type="primary" @click="dialogStatus==='create'?createData():updateData()">确 定</el-button>
 
       </div>
@@ -361,7 +361,7 @@ export default {
       dialogFormVisible: false,
       textMap: {
         update: '更新信息',
-        create: '创建部门'
+        create: '创建用户'
       },
       dialog: false,
       tempData: {
@@ -487,7 +487,8 @@ export default {
       this.dialogStatus = 'create'
       this.dialogFormVisible = true
     },
-    handleDownFormVisible() {
+    handleDownFormVisible(ref) {
+      this.$refs[ref].resetFields()
       this.tempData = ''
       this.dialogFormVisible = false
       this.resetPasswordForm = false
