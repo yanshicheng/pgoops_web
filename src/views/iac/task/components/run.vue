@@ -439,6 +439,15 @@ export default {
         message: '任务运行完成，websocket已经断开连接请检查日志'
       })
     },
+    erroMssg() {
+      this.webSocketData = ''
+      this.$message({
+        showClose: true,
+        duration: 60000,
+        type: 'error',
+        message: 'websocket 连接错误，请检查日志'
+      })
+    },
     wsResultData(url) {
       var ws = new WebSocket(url)
       this.closeDia()
@@ -453,19 +462,29 @@ export default {
           func1(this.webSocketData)
 
           ws.onclose = (evt) => {
+            console.log('websocket 正常关闭')
           }
         }
       }
       const func2 = function func3(val) {
         this.mssg()
+        ws.onclose = (evt) => {
+          console.log('websocket 正常关闭')
+        }
       }
       const func1 = func2.bind(this)
-      // ws.onerror = function(err) {
-      //   this.$message({
-      //     showClose: true,
-      //     message: 'Websocket 连接异常，请检查',
-      //     type: 'error'
-      //   })
+      ws.onerror = function(err) {
+        func4(err)
+        console.log(err)
+        ws.onclose = (evt) => {
+          console.log('websocket 异常关闭')
+        }
+      }
+      const func5 = function func6(val) {
+        this.websocketDialogVisible = false
+        this.erroMssg()
+      }
+      const func4 = func5.bind(this)
       //   ws.onclose = function() {
       //     // 关闭 websocket
       //   }
@@ -481,8 +500,7 @@ export default {
           }).then(() => {
             this.serializersData()
             masterApi.create(this.addFormData).then(response => {
-              this.wsResultData(`ws://127.0.0.1:8000/ws/iac/task/${response.data.id}/`)
-
+              this.wsResultData(`${response.data.ws_url}`)
               // ws.onopen = function () {
               //   // Web Socket 已连接上，使用 send() 方法发送数据
               //   ws.send("发送数据")

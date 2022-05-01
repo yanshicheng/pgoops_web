@@ -56,9 +56,9 @@
         <tags-view v-if="needTagsView" />
       </div>
       <app-main style="margin-top: 30px; margin-left: 20px;width: 97%;" />
-      <right-panel v-if="showSettings">
-        <settings />
-      </right-panel>
+<!--      <right-panel v-if="showSettings">-->
+<!--        <settings />-->
+<!--      </right-panel>-->
       <div class="bottom-info" style="padding: 33px 0px;">
         <div>
           <a target="_blank" href="http://www.pgoops.com" class="ele-text-secondary" style="margin-left: 5px"> 官网 </a>

@@ -393,25 +393,30 @@ export default {
     handleSizeChange(val) {
       this.pageQuerylist.size = val
       this.pageQuerylist.page = 1
-      this.getSearchData()
+      this.getSearchDataVal()
     },
     handleCurrentChange(val) {
       this.pageQuerylist.page = val
-      this.getSearchData()
+      this.getSearchDataVal()
     },
-    getSearchData() {
+    getSearchDataVal() {
       const params = {
-        search: this.searchInfo.search,
-        periodic_method: this.searchInfo.periodic_method,
+        from_periodic_null: this.searchInfo.from_periodic_null,
         repository: this.searchInfo.repository,
-        enabled: this.searchInfo.enabled,
-        page: 1,
+        state: this.searchInfo.state,
+        search: this.searchInfo.search,
+        page: this.pageQuerylist.page,
         size: this.pageQuerylist.size
       }
       masterApi.list(params).then((res) => {
         this.dataList = res.data.result ? res.data.result : res.data
         this.pageQuerylist.total = res.data.count
       })
+    },
+
+    getSearchData() {
+      this.pageQuerylist.page = 1
+      this.getSearchDataVal()
     }
   }
 }

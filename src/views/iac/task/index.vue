@@ -4,7 +4,7 @@
       <div>
         <el-form ref="searchForm" :inline="true" :model="searchInfo">
           <el-form-item label="模糊搜索">
-            <el-input v-model="searchInfo.search" style="width: 230px" placeholder="请输入搜索内容" />
+            <el-input v-model="searchInfo.search" style="width: 230px" placeholder="请输入搜索内容"/>
           </el-form-item>
           <el-form-item label="执行方法">
             <el-select v-model="searchInfo.from_periodic_null" filterable clearable placeholder="请选择">
@@ -156,12 +156,12 @@
 </template>
 
 <script>
-import { Task as masterApi } from '@/api/iac'
-import { REPOSITORY as repositoryApi } from '@/api/iac'
+import {Task as masterApi} from '@/api/iac'
+import {REPOSITORY as repositoryApi} from '@/api/iac'
 import RunTableData from './components/run'
 // import MainDetail from './components/mainDetail'
 import moment from 'moment'
-import { getPageQueryList } from '@/utils/page-query'
+import {getPageQueryList} from '@/utils/page-query'
 
 const defaultSearchInfo = {
   type: '',
@@ -194,7 +194,7 @@ export default {
     // MainDetail
   },
   filters: {
-    formatDate: function(date) {
+    formatDate: function (date) {
       return moment.utc(date).format('YYYY-MM-DD HH:mm:ss')
     }
   },
@@ -255,7 +255,7 @@ export default {
       })
     },
     infoFormFunc(row) {
-      this.$router.push({ name: 'IAC_TASK_DETAIL', query: { id: row.id }})
+      this.$router.push({name: 'IAC_TASK_DETAIL', query: {id: row.id}})
     },
     onSubmit() {
     },
@@ -312,25 +312,30 @@ export default {
     handleSizeChange(val) {
       this.pageQuerylist.size = val
       this.pageQuerylist.page = 1
-      this.getSearchData()
+      this.getSearchDataVal()
     },
     handleCurrentChange(val) {
       this.pageQuerylist.page = val
-      this.getSearchData()
+      this.getSearchDataVal()
     },
-    getSearchData() {
+    getSearchDataVal() {
       const params = {
         from_periodic_null: this.searchInfo.from_periodic_null,
         repository: this.searchInfo.repository,
         state: this.searchInfo.state,
         search: this.searchInfo.search,
-        page: 1,
+        page: this.pageQuerylist.page,
         size: this.pageQuerylist.size
       }
       masterApi.list(params).then((res) => {
         this.dataList = res.data.result ? res.data.result : res.data
         this.pageQuerylist.total = res.data.count
       })
+    },
+
+    getSearchData() {
+      this.pageQuerylist.page = 1
+      this.getSearchDataVal()
     }
   }
 }

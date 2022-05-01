@@ -360,8 +360,8 @@ export const asyncRoutes = [
 ]
 
 const createRouter = () => new Router({
-  // mode: 'hash', // require service support
-  mode: 'history',
+  mode: 'hash', // require service support
+  //mode: 'history',
   scrollBehavior: () => ({ y: 0 }),
   routes: constantRoutes
 })
