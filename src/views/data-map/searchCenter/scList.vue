@@ -34,16 +34,19 @@
                 v-for="(item, i) in items.theadList"
                 :key="i"
                 v-bind="item"
+                :max-height="tableHeight"
                 :label="item.label"
                 :prop="item.props"
               >
+                <!--                :width="flexColumnWidth(item.label,item.props)"-->
+
                 <template slot-scope="scope">
                   <span>{{ scope.row[item.props] }}</span>
                 </template>
               </el-table-column>
               <el-table-column label="操作" fixed="right">
                 <template slot-scope="scope">
-                  <el-button plain type="success" size="mini" @click="checkDetailInfo(scope.row)">详情</el-button>
+                  <el-button size="mini" type="text" icon="el-icon-view" @click="checkDetailInfo(scope.row)">详情</el-button>
                 </template>
               </el-table-column>
             </el-table>
@@ -68,6 +71,7 @@ export default {
         classify_id: '',
         search: ''
       },
+      tableHeight: window.innerHeight - 290,
       tableObj: {},
       tableColumns: [],
       tableList: [],
@@ -83,6 +87,34 @@ export default {
     this.getMainList()
   },
   methods: {
+    getMaxLength(arr) {
+      return arr.reduce((acc, item) => {
+        if (item) {
+          const calcLen = this.getTextWidth(item)
+          if (acc < calcLen) {
+            acc = calcLen
+          }
+        }
+        return acc
+      }, 0)
+    },
+    getTextWidth(str) {
+      let width = 0
+      const html = document.createElement('span')
+      html.innerText = str
+      html.className = 'getTextWidth'
+      document.querySelector('body').appendChild(html)
+      width = document.querySelector('.getTextWidth').offsetWidth
+      document.querySelector('.getTextWidth').remove()
+      return width
+    },
+    flexColumnWidth(label, prop) {
+      // 1.获取该列的所有数据
+      const arr = this.tableList.map(x => x[prop])
+      arr.push(label) // 把每列的表头也加进去算
+      // 2.计算每列内容最大的宽度 + 表格的内间距（依据实际情况而定）
+      return (this.getMaxLength(arr) + 25) + 'px'
+    },
     // 获取主列表
     getMainList() {
       CMDBClassify.parent().then(res => {

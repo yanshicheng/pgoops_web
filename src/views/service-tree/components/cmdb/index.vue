@@ -207,7 +207,6 @@ export default {
         if (res.code === -1) {
           this.$message.error(res.message)
         } else {
-          console.log(res)
           this.tableObj = res.data.result ? res.data.result : res.data
           this.pageQuerylist.total = res.data.count
           this.formatTableData(this.tableObj)
@@ -292,7 +291,6 @@ export default {
     },
     getNodeClassify() {
       masterApi.list({ node_id: this.nodes.pk }).then(res => {
-        console.log(res)
         this.classifyList = res.data
       })
     },

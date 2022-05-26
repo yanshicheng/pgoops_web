@@ -679,3 +679,40 @@ export const CloudDisk = {
     })
   }
 }
+
+const physicalServerURL = 'v1/data-map/physical-server'
+export const PhysicalServer = {
+  create(params) {
+    return request.post(`${physicalServerURL}/`, params).then(response => {
+      return response
+    })
+  },
+  delete(id) {
+    return request.delete(`${physicalServerURL}/${id}/`)
+  },
+  update(id, params) {
+    return request.put(`${physicalServerURL}/${id}/`, params).then(response => {
+      return response
+    })
+  },
+  patch(id, params) {
+    return request.patch(`${physicalServerURL}/${id}/`, params).then(response => {
+      return response
+    })
+  },
+  get(id) {
+    return request.get(`${physicalServerURL}/${id}/`).then(response => {
+      return response
+    })
+  },
+  list(params) {
+    return request.get(`${physicalServerURL}/`, { params: params }).then(response => {
+      return response
+    })
+  },
+  monitor(id) {
+    return request.get(`${physicalServerURL}/${id}/monitor/`).then(response => {
+      return response
+    })
+  }
+}

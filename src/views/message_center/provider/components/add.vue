@@ -11,6 +11,23 @@
         <el-form-item label="媒介名" required prop="name">
           <el-input v-model="addFormData.name" style="width: 60%" />
         </el-form-item>
+        <el-form-item label="图标">
+          <el-upload
+            class="upload-demo"
+            drag
+            :on-remove="handleRemove"
+            :http-request="uploadFileDrawer"
+            :on-change="handleChange"
+            :file-list="drawerFileList"
+            :before-upload="beforeAvatarUpload"
+            action=""
+            :show-file-list="true"
+          >
+            <i class="el-icon-upload" />
+            <div class="el-upload__text">将文件拖到此处，或<em>点击上传</em></div>
+            <div slot="tip" class="el-upload__tip" style="color: red"> ***只能上传png/jpg/icon/svg/格式图标/并且不可超过2M</div>
+          </el-upload>
+        </el-form-item>
         <el-form-item />
         <el-form-item label="媒介类" required prop="provider_class">
           <el-input v-model="addFormData.provider_class" style="width: 60%" />
@@ -112,6 +129,37 @@ export default {
     // 高亮渲染
   },
   methods: {
+    beforeAvatarUpload(file) {
+      const isJpeg = file.type === 'image/jpeg'
+      const isPng = file.type === 'image/png'
+      const isIcon = file.type === 'vnd.microsoft.icon'
+      const isSvg = file.type === 'image/svg+xml'
+      const isLt2M = file.size / 1024 / 1024 < 2
+      if (!isLt2M) {
+        this.$message.error('上传图标大小不能超过 2MB!')
+      }
+      if (isJpeg || isPng || isIcon || isSvg) {
+        return true
+      } else {
+        this.$message.error('上传的项目文件只能是 png| jpeg |icon|格式!')
+        return false
+      }
+    },
+    handleRemove(file, fileList) {
+      this.ruleForm = {}
+      this.drawerFileList = []
+      this.tmpFile = {}
+    },
+    handleChange(file, fileList) {
+      if (fileList.length !== 1) {
+        fileList.splice(0, 1)
+      }
+      this.addFormData.icon = file.raw
+      this.drawerFileList = fileList
+    },
+    uploadFileDrawer(params) {
+      this.tmpFile = { 'icon': params.file }
+    },
     closeForm(formName) {
       this.drawerFileList = []
       this.$refs['addFormData'].resetFields()
@@ -124,7 +172,19 @@ export default {
         cancelButtonText: '取消',
         type: 'warning'
       }).then(() => {
-        masterApi.patch(this.addFormData.id, this.addFormData).then((request) => {
+        const formData = new FormData()
+        if (this.addFormData.icon) {
+          formData.append('icon', this.addFormData.icon)
+        }
+        formData.append('provider_class', this.addFormData.provider_class)
+        formData.append('method', this.addFormData.method)
+        formData.append('name', this.addFormData.name)
+        const config = {
+          headers: {
+            'Content-Type': 'multipart/form-data'
+          }
+        }
+        masterApi.patch(this.addFormData.id, formData, config).then((request) => {
           this.$notify({
             title: '成功',
             message: '媒介更新成功!',
@@ -148,7 +208,17 @@ export default {
             cancelButtonText: '取消',
             type: 'warning'
           }).then(() => {
-            masterApi.create(this.addFormData).then((request) => {
+            const formData = new FormData()
+            formData.append('icon', this.addFormData.icon)
+            formData.append('provider_class', this.addFormData.provider_class)
+            formData.append('method', this.addFormData.method)
+            formData.append('name', this.addFormData.name)
+            const config = {
+              headers: {
+                'Content-Type': 'multipart/form-data'
+              }
+            }
+            masterApi.create(formData, config).then((request) => {
               this.$notify({
                 title: '成功',
                 message: '媒介创建成功!',

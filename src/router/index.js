@@ -70,82 +70,65 @@ export const constantRoutes = [
     path: '/',
     component: Layout,
     redirect: '/dashboard',
+    name: '',
+    meta: {
+      title: '仪表盘',
+      icon: 'dashboard',
+      roles: ['admin']
+    },
     children: [
       {
         path: 'dashboard',
         component: () => import('@/views/dashboard/index'),
         name: 'Dashboard',
-        meta: { title: 'Dashboard', icon: 'dashboard', affix: true }
+        meta: { title: '监控大盘', icon: 'dashboard', affix: true }
       }
     ]
+  },
+  {
+    path: '/cmdb',
+    component: Layout,
+    alwaysShow: true, // will always show the root menu
+    name: 'CMDB',
+    meta: {
+      title: 'CMDB',
+      icon: 'asset',
+      roles: ['admin', 'pgo']
+    },
+    children: [
+      {
+        path: 'physical-server',
+        component: () => import('@/views/data-map/physical_server/index'),
+        name: 'CMDB_PHYSICAL_SERVER',
+        meta: {
+          title: '物理主机',
+          roles: ['admin', 'pgo'],
+          icon: 'asset'
+        }
+      }
+      // {
+      //   path: 'history',
+      //   component: () => import('@/views/task/history/index'),
+      //   name: 'CMDB_PHYSICAL_SERVER1',
+      //   meta: {
+      //     title: '告警历史',
+      //     roles: ['admin'],
+      //     icon: 'asset'
+      //   }
+      // },
+      // {
+      //   path: 'history/detail',
+      //   component: () => import('@/views/task/history/components/detail'),
+      //   hidden: true,
+      //   name: 'CMDB_PHYSICAL_SERVER2',
+      //   meta: {
+      //     title: '告警详情',
+      //     roles: ['admin'],
+      //     icon: 'asset'
+      //   }
+      // }
+    ]
   }
-  // {
-  //   path: '/alert',
-  //   component: Layout,
-  //   // redirect: '/cmdb/acces-center',
-  //   alwaysShow: true, // will always show the root menu
-  //   name: 'Alert',
-  //   meta: {
-  //     title: 'Alert',
-  //     icon: 'asset',
-  //     roles: ['admin']
-  //   },
-  //   children: [
-  //     {
-  //       path: 'host',
-  //       component: () => import('@/views/alert/host/index'),
-  //       name: 'AletrHost',
-  //
-  //       meta: {
-  //         title: '主机管理',
-  //         roles: ['admin'],
-  //         icon: 'asset'
-  //       }
-  //     },
-  //     {
-  //       path: 'history',
-  //       component: () => import('@/views/alert/history/index'),
-  //       name: 'AlertHistory',
-  //       meta: {
-  //         title: '告警历史',
-  //         roles: ['admin'],
-  //         icon: 'asset'
-  //       }
-  //     },
-  //     {
-  //       path: 'history/detail',
-  //       component: () => import('@/views/alert/history/components/detail'),
-  //       hidden: true,
-  //       name: 'AlertHistoryDetail',
-  //       meta: {
-  //         title: '告警详情',
-  //         roles: ['admin'],
-  //         icon: 'asset'
-  //       }
-  //     }]
-  // },
-  // {
-  //   path: '/message-center',
-  //   component: Layout,
-  //   // redirect: '/cmdb/acces-center',
-  //   alwaysShow: true, // will always show the root menu
-  //   name: 'MESSAGE_CENTER',
-  //   meta: {
-  //     title: '消息中心',
-  //     icon: 'asset',
-  //     roles: ['admin']
-  //   },
-  //   children: [
-  //     {
-  //       path: 'history',
-  //       component: () => import('@/views/message_center/history/index'),
-  //       name: 'MESSAGE_CENTER_HISTORY',
-  //       meta: {
-  //         title: '消息历史',
-  //         roles: ['admin'],
-  //         icon: 'asset'
-  //       }
-  //     },
   //     {
   //       path: 'level',
   //       component: () => import('@/views/message_center/level/index'),
@@ -175,7 +158,7 @@ export const constantRoutes = [
   //         roles: ['admin'],
   //         icon: 'asset'
   //       }
-  //     },
+  //     }
   //     {
   //       path: 'history/detail',
   //       component: () => import('@/views/message_center/history/components/detail'),
@@ -361,7 +344,7 @@ export const asyncRoutes = [
 
 const createRouter = () => new Router({
   mode: 'hash', // require service support
-  //mode: 'history',
+  // mode: 'history',
   scrollBehavior: () => ({ y: 0 }),
   routes: constantRoutes
 })

@@ -35,7 +35,7 @@
           <el-table-column prop="name" label="名称" />
           <el-table-column prop="path" label="PATH" />
           <el-table-column prop="method" label="请求方法" />
-          <el-table-column prop="create_at" label="创建时间" />
+          <el-table-column prop="created_at" label="创建时间" />
           <el-table-column label="操作" fixed="right" width="160">
             <template slot-scope="scope">
               <el-button plain type="primary" size="mini" @click="editTableData(scope.row)">编辑</el-button>

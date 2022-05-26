@@ -135,12 +135,8 @@ export default {
       this.searchData()
     },
     fetchBDRelationList() {
-      console.log(999999999)
-      console.log(this.parentAssetId)
       if (!this.parentAssetId) return false
       masterApi.get(this.parentAssetId).then(res => {
-        console.log(res)
-        console.log(999999999)
         if (res.code === 0) {
           this.tableData = this.formatTableList(res.data.children)
         } else {

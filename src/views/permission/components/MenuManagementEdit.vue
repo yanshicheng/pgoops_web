@@ -9,16 +9,16 @@
       <el-form-item label="路径" prop="path" required>
         <el-input v-model="form.path" autocomplete="off" />
       </el-form-item>
-      <el-form-item label="名称" prop="title" required>
+      <el-form-item label="名称">
         <el-input v-model="form.title" autocomplete="off" />
       </el-form-item>
-      <el-form-item label="路由名" prop="name" required>
+      <el-form-item label="路由名">
         <el-input v-model="form.name" autocomplete="off" />
       </el-form-item>
-      <el-form-item label="VUE文件路径" prop="component" required>
+      <el-form-item label="VUE文件路径">
         <el-input v-model="form.component" autocomplete="off" />
       </el-form-item>
-      <el-form-item label="图标" prop="icon" required>
+      <el-form-item label="图标">
         <el-input v-model="form.icon" autocomplete="off" />
       </el-form-item>
       <el-form-item label="重定向" prop="redirect">
@@ -93,7 +93,7 @@ export default {
         always_show: true,
         no_cache: false,
         affix: false,
-        breadcrumb: false
+        breadcrumb: true
       },
       title: '',
       parentList: [],

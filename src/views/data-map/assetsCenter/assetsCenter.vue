@@ -29,6 +29,8 @@
           <el-table-column
             v-for="(item, index) in tableColumns"
             :key="index"
+            :width="flexColumnWidth(item.label,item.props)"
+            :max-height="tableHeight"
             v-bind="item"
             :label="item.label"
             :prop="item.props"
@@ -37,10 +39,15 @@
               <span>{{ scope.row[item.props] }}</span>
             </template>
           </el-table-column>
-          <el-table-column label="操作" fixed="right" width="160">
+          <el-table-column label="操作" fixed="right" width="150">
             <template slot-scope="scope">
-              <el-button plain type="primary" size="mini" @click="editTableData(scope.row)">编辑</el-button>
-              <el-button plain type="danger" size="mini" @click="deleteData(scope.row.id, scope.$index, tableList)">删除
+              <el-button size="mini" type="text" icon="el-icon-edit" @click="editTableData(scope.row)">编辑</el-button>
+              <el-button
+                size="mini"
+                type="text"
+                icon="el-icon-delete"
+                @click="deleteData(scope.row.id, scope.$index, tableList)"
+              >删除
               </el-button>
             </template>
           </el-table-column>
@@ -94,6 +101,7 @@ export default {
       },
       tableObj: {},
       tableColumns: [],
+      tableHeight: window.innerHeight - 290,
       tableList: [],
       mainList: [],
       secondList: [],
@@ -116,6 +124,34 @@ export default {
     this.getMainList()
   },
   methods: {
+    getMaxLength(arr) {
+      return arr.reduce((acc, item) => {
+        if (item) {
+          const calcLen = this.getTextWidth(item)
+          if (acc < calcLen) {
+            acc = calcLen
+          }
+        }
+        return acc
+      }, 0)
+    },
+    getTextWidth(str) {
+      let width = 0
+      const html = document.createElement('span')
+      html.innerText = str
+      html.className = 'getTextWidth'
+      document.querySelector('body').appendChild(html)
+      width = document.querySelector('.getTextWidth').offsetWidth
+      document.querySelector('.getTextWidth').remove()
+      return width
+    },
+    flexColumnWidth(label, prop) {
+      // 1.获取该列的所有数据
+      const arr = this.tableList.map(x => x[prop])
+      arr.push(label) // 把每列的表头也加进去算
+      // 2.计算每列内容最大的宽度 + 表格的内间距（依据实际情况而定）
+      return (this.getMaxLength(arr) + 25) + 'px'
+    },
     handleSizeChange(val) {
       this.pageQuerylist.size = val
       this.pageQuerylist.page = 1
@@ -172,7 +208,8 @@ export default {
       this.pageQuerylist.page = 1
       this.pageQuerylist.size = 10
       this.pageQuerylist.total = 0
-      const params = { classify_id: val,
+      const params = {
+        classify_id: val,
         search: this.formInline.search,
         page: 1,
         size: 10

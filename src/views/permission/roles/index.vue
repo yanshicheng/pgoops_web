@@ -16,8 +16,8 @@
       <el-table :data="tableData" border style="width: 100%">
         <el-table-column type="index" width="50" label="序号" />
         <el-table-column prop="name" label="名称" />
-        <el-table-column prop="create_at" label="创建时间" />
-        <el-table-column prop="update_at" label="更新时间" />
+        <el-table-column prop="created_at" label="创建时间" />
+        <el-table-column prop="updated_at" label="更新时间" />
         <el-table-column label="操作" fixed="right" width="160">
           <template slot-scope="scope">
             <el-button plain type="primary" size="mini" @click="editTableData(scope.row)">编辑</el-button>

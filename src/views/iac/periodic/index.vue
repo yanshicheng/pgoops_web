@@ -1,6 +1,6 @@
 <template>
   <div>
-    <el-card class="box-card" shadow="hover" style="background-color: #fafafa">
+    <el-card class="box-card" style="margin-top: 10px" shadow="hover">
       <div>
         <el-form ref="searchForm" :inline="true" :model="searchInfo">
           <el-form-item label="模糊搜索">
@@ -36,23 +36,22 @@
               />
             </el-select>
           </el-form-item>
-          <el-form-item style="float:right ">
-            <el-button size="mini" type="primary" icon="el-icon-search" @click="getSearchData">查询</el-button>
-            <el-button size="mini" icon="el-icon-refresh" @click="searchOnReset">重置</el-button>
+          <el-form-item>
+            <el-button icon="el-icon-refresh" @click="searchOnReset">重置</el-button>
+            <el-button type="primary" icon="el-icon-search" @click="getSearchData">查询</el-button>
           </el-form-item>
         </el-form>
-      </div>
-    </el-card>
 
-    <el-card class="box-card" style="margin-top: 10px" shadow="hover">
-      <div style="margin-bottom: 20px">
-        <el-button @click="addData('create')">新增</el-button>
+      </div>
+      <div style="background: #fafafa;border:2px solid #f2f5fa;height: 50px;">
+        <el-button icon="el-icon-plus" type="primary" style="margin-left: 15px; margin-top: 7px" @click="addData('create')">新增</el-button>
       </div>
       <el-table
         ref="multipleTable"
         :data="dataList"
         border
-        :cell-style="{textAlign:&quot;center&quot;}"
+        :max-height="tableHeight"
+        :cell-style="{textAlign:'center'}"
         :header-cell-style="{textAlign: 'center',background:'#fafafa',color:'#606266'}"
         tooltip-effect="dark"
         style="width: 100%"
@@ -140,16 +139,16 @@
             <!--            <el-button size="mini" type="success" @click="infoFormFunc(row)">-->
             <!--              详情-->
             <!--            </el-button>-->
-            <el-button v-if="row.enabled" size="mini" type="info" @click="pauseData(row)">
+            <el-button v-if="row.enabled" size="mini" type="text" icon="el-icon-video-pause" @click="pauseData(row)">
               暂停
             </el-button>
-            <el-button v-else size="mini" type="warning" @click="enableData(row)">
+            <el-button v-else size="mini" type="text" icon="el-icon-video-play" @click="enableData(row)">
               启用
             </el-button>
             <!--            <el-button size="mini" type="warning" @click="downLoadFormFunc(row)">-->
             <!--              下载-->
             <!--            </el-button>-->
-            <el-button size="mini" type="danger" @click="deleteFormFunc(row)">
+            <el-button size="mini" type="text" icon="el-icon-delete" @click="deleteFormFunc(row)">
               删除
             </el-button>
           </template>
@@ -248,6 +247,7 @@ export default {
       // 表格多选相关
       tableChangeList: [],
       dataList: [],
+      tableHeight: window.innerHeight - 290,
       // 搜索相关
       pageQuerylist: JSON.parse(JSON.stringify(getPageQueryList())),
       searchInfo: JSON.parse(JSON.stringify(defaultSearchInfo)),

@@ -1,29 +1,26 @@
 <template>
   <div>
-    <el-card class="box-card" shadow="hover">
-      <div>
-        <el-form :inline="true" :model="searchInfo">
+    <el-card class="box-card" style="margin-top: 10px" shadow="hover">
+      <div style="background: #fafafa;border:2px solid #f2f5fa;height: 50px;">
+        <el-form :inline="true" :model="searchInfo" style="margin-left: 15px; margin-top: 7px">
           <el-form-item label="模糊搜索">
             <el-input v-model="searchInfo.search" style="width: 230px" placeholder="请输入搜索内容" />
           </el-form-item>
 
-          <el-form-item style="float:right ">
-            <el-button size="mini" type="primary" icon="el-icon-search" @click="getSearchData">查询</el-button>
-            <el-button size="mini" icon="el-icon-refresh" @click="searchOnReset">重置</el-button>
+          <el-form-item>
+            <el-button icon="el-icon-refresh" @click="searchOnReset">重置</el-button>
+            <el-button type="primary" icon="el-icon-search" @click="getSearchData">查询</el-button>
+            <el-button icon="el-icon-plus" type="primary" @click="addData('create')">新增</el-button>
+
           </el-form-item>
         </el-form>
-      </div>
-    </el-card>
-
-    <el-card class="box-card" style="margin-top: 10px" shadow="hover">
-      <div style="margin-bottom: 20px">
-        <el-button @click="addData('create')">新增</el-button>
       </div>
       <el-table
         ref="multipleTable"
         :data="dataList"
         border
-        :cell-style="{textAlign:&quot;center&quot;}"
+        :max-height="tableHeight"
+        :cell-style="{textAlign:'center'}"
         :header-cell-style="{textAlign: 'center',background:'#fafafa',color:'#606266'}"
         tooltip-effect="dark"
         style="width: 100%"
@@ -94,18 +91,18 @@
         />
         <!--          show-overflow-tooltip-->
 
-        <el-table-column align="center" class-name="small-padding fixed-width" fixed="right" label="操作" width="230">
+        <el-table-column align="center" class-name="small-padding fixed-width" fixed="right" label="操作" width="240">
           <template slot-scope="{row}">
             <!--            <el-button size="mini" type="" @click="infodata(row)">-->
             <!--              详情-->
             <!--            </el-button>-->
-            <el-button size="mini" type="info" @click="addData(row)">
+            <el-button size="mini" type="text" icon="el-icon-edit" @click="addData(row)">
               编辑
             </el-button>
-            <el-button size="mini" type="warning" @click="downLoadFormFunc(row)">
+            <el-button size="mini" type="text" icon="el-icon-download" @click="downLoadFormFunc(row)">
               下载
             </el-button>
-            <el-button size="mini" type="danger" @click="deleteData(row)">
+            <el-button size="mini" type="text" icon="el-icon-delete" @click="deleteData(row)">
               删除
             </el-button>
           </template>
@@ -170,6 +167,7 @@ export default {
       // 表格多选相关
       tableChangeList: [],
       dataList: [],
+      tableHeight: window.innerHeight - 290,
       // 搜索相关
       pageQuerylist: JSON.parse(JSON.stringify(getPageQueryList())),
       searchInfo: {

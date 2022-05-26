@@ -50,15 +50,15 @@
   <div :class="classObj" class="app-wrapper">
     <div v-if="device==='mobile'&&sidebar.opened" class="drawer-bg" @click="handleClickOutside" />
     <sidebar class="sidebar-container" />
-    <div :class="{hasTagsView:needTagsView}" class="main-container">
+    <div :class="{hasTagsView:needTagsView}" class="main-container" style="margin-outside: 10px">
       <div :class="{'fixed-header':fixedHeader}">
         <navbar />
         <tags-view v-if="needTagsView" />
       </div>
-      <app-main style="margin-top: 30px; margin-left: 20px;width: 97%;" />
-<!--      <right-panel v-if="showSettings">-->
-<!--        <settings />-->
-<!--      </right-panel>-->
+      <app-main id="root" style=" padding-top:120px;padding-left:20px;width: 97%;height: 100%" @touchmove.prevent />
+      <!--      <right-panel v-if="showSettings">-->
+      <!--        <settings />-->
+      <!--      </right-panel>-->
       <div class="bottom-info" style="padding: 33px 0px;">
         <div>
           <a target="_blank" href="http://www.pgoops.com" class="ele-text-secondary" style="margin-left: 5px"> 官网 </a>
@@ -135,7 +135,12 @@ export default {
     top: 0;
   }
 }
-
+//.el-table--scrollable-y .el-table__body-wrapper {
+//  overflow-y: auto;
+//}
+//.el-table--scrollable-x .el-table__body-wrapper {
+//  overflow-x: auto;
+//}
 .drawer-bg {
   background: #000;
   opacity: 0.3;

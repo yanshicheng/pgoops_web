@@ -42,7 +42,7 @@
                   <p class="card-title">{{ item.name }}</p>
                   <div class="card-info one-line">
                     <div class="infos"><span>别名: </span><span>{{ item.alias }}</span></div>
-                    <div class="infos"><span>创建时间: </span><span>{{ item.create_at }}</span></div>
+                    <div class="infos"><span>创建时间: </span><span>{{ item.created_at }}</span></div>
                   </div>
                   <div class="card-info">
                     <div class="infos desc"><span>描述: </span><span>{{ item.remark }}</span></div>

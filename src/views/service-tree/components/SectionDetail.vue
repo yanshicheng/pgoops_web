@@ -21,7 +21,7 @@
         </div>
         <div class="name-group-info">
           <label for="">创建时间: </label>
-          <span>{{ currentNode.create_at }}</span>
+          <span>{{ currentNode.created_at }}</span>
         </div>
       </div>
     </div>

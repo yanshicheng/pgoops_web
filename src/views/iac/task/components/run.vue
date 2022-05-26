@@ -475,7 +475,6 @@ export default {
       const func1 = func2.bind(this)
       ws.onerror = function(err) {
         func4(err)
-        console.log(err)
         ws.onclose = (evt) => {
           console.log('websocket 异常关闭')
         }

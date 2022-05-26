@@ -108,7 +108,6 @@ export default {
       })
     },
     readMembersChange(val) {
-      console.log('读改变2')
       const params = {
         read_member: val,
         write_member: []
@@ -116,7 +115,6 @@ export default {
       this.addOperaPermission(params)
     },
     readMembersDelete(val) {
-      console.log('读改变1')
       const params = {
         read_member: [val],
         write_member: []
@@ -124,7 +122,6 @@ export default {
       this.deleteOperaPermission(params)
     },
     writeMembersChange(val) {
-      console.log('写改变1')
       const params = {
         read_member: [],
         write_member: val
@@ -132,7 +129,6 @@ export default {
       this.addOperaPermission(params)
     },
     writeMembersDelete(val) {
-      console.log('写改变2')
       const params = {
         read_member: [],
         write_member: [val]

@@ -215,9 +215,7 @@ export default {
       this.currentNode = data
     },
     handleTabClick(data) {
-      console.log(data)
       this.activeName = data.name
-      console.log(this.activeName)
     }
   }
 }

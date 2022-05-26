@@ -82,3 +82,100 @@
 .el-range-separator {
   box-sizing: content-box;
 }
+
+
+.el-table--scrollable-y .el-table__body-wrapper {
+  overflow-y: auto;
+}
+.el-table--scrollable-x .el-table__body-wrapper {
+  overflow-x: auto;
+}
+.el-table__body-wrapper {
+  overflow: hidden;
+  position: relative;
+}
+.el-table__body-wrapper, .el-table__footer-wrapper, .el-table__header-wrapper {
+  width: 100%;
+}
+
+.el-table .el-table__fixed {
+  height: auto !important;
+  bottom: 16px !important;
+
+  &::before {
+    background-color: transparent;
+  }
+}
+//.el-table__body-wrapper {
+//  height: 60px;
+//}
+.el-table {
+  position: relative;
+  overflow: hidden;
+  box-sizing: border-box;
+  flex: 1;
+  width: 100%;
+  max-width: 100%;
+  background-color: #fff;
+  font-size: 14px;
+  color: #606266;;
+}
+
+/* .tableX为要显示滚动条的类名 */
+/* 显示横向滚动条 */
+.tableX .el-table--scrollable-x .el-table__body-wrapper {
+  padding: 0 0 5px 0;
+  margin: 0 0 5px 0;
+  overflow-x: auto;
+}
+/* 滚动条的滑块样式 */
+.tableX .el-table .el-table__body-wrapper::-webkit-scrollbar-thumb {
+  background-color: #ccc !important;
+  border-radius: 30px !important;
+}
+/* 去除右侧固定定位阴影多出来的像素 */
+.tableX .el-table__fixed-right{
+  height: calc(100% - 27px) !important;
+}
+.el-table–border::after, .el-table–group::after, .el-table::before {
+  background: none;
+  border: none;
+}
+
+//更改滚动条样式
+.el-table__body-wrapper::-webkit-scrollbar {
+  display:block;
+  width: 12px;
+  height: auto;
+  background-color: rgba(167, 122, 122, 0.47);
+}
+/*定义滚动条的轨道，内阴影及圆角*/
+ .el-table__body-wrapper::-webkit-scrollbar-track {
+  -webkit-box-shadow: inset 0 0 6px rgba(253, 253, 253, 0.3);
+  border-radius: 0;
+  background-color: #ffffff;
+}
+
+/*定义滑块，内阴影及圆角*/
+.el-table__body-wrapper::-webkit-scrollbar-thumb {
+  /*width: 10px;*/
+  height: 20px;
+  border-radius: 10px;
+  -webkit-box-shadow: inset 0 0 6px rgba(7, 7, 7, 0.3);
+  background-color:#d4d4d4;
+}
+
+.el-table__body-wrapper::-webkit-scrollbar-thumb:hover,
+.el-table__body-wrapper::-webkit-scrollbar-thumb:active{
+  /*width: 10px;*/
+  /*height: 20px;*/
+  /*border-radius: 10px;*/
+  /*-webkit-box-shadow: inset 0 0 6px rgba(158, 152, 152, 0.3);*/
+  background-color: #d4d4d4;
+  cursor: pointer;
+}
+
+.el-pagination {
+  margin-top: 10px;
+  text-align: center;
+}

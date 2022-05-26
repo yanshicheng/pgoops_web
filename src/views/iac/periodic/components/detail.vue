@@ -6,8 +6,8 @@
           <el-collapse-item title="执行状态" name="1" style="margin-top: 10px">
             <el-descriptions direction="vertical" :column="4" border>
               <el-descriptions-item label="执行用户">{{ taskInfoData.created_by }}</el-descriptions-item>
-              <el-descriptions-item label="开始时间">{{ taskInfoData.create_at }}</el-descriptions-item>
-              <el-descriptions-item label="结束时间">{{ taskInfoData.update_at }}</el-descriptions-item>
+              <el-descriptions-item label="开始时间">{{ taskInfoData.created_at }}</el-descriptions-item>
+              <el-descriptions-item label="结束时间">{{ taskInfoData.updated_at }}</el-descriptions-item>
               <el-descriptions-item label="状态">
                 <el-tag size="small">{{ taskInfoData.state }}</el-tag>
               </el-descriptions-item>
@@ -78,8 +78,8 @@
               <el-descriptions-item label="入口文件">{{ repositoryData.main }}</el-descriptions-item>
               <el-descriptions-item label="创建用户">{{ repositoryData.created_by }}</el-descriptions-item>
               <el-descriptions-item label="更新用户">{{ repositoryData.updated_by }}</el-descriptions-item>
-              <el-descriptions-item label="创建时间">{{ repositoryData.create_at }}</el-descriptions-item>
-              <el-descriptions-item label="更新时间">{{ repositoryData.update_at }}</el-descriptions-item>
+              <el-descriptions-item label="创建时间">{{ repositoryData.created_at }}</el-descriptions-item>
+              <el-descriptions-item label="更新时间">{{ repositoryData.updated_at }}</el-descriptions-item>
               <el-descriptions-item label="备注">
                 {{ repositoryData.describe }}
               </el-descriptions-item>

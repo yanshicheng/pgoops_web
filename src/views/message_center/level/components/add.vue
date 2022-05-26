@@ -14,7 +14,7 @@
         <el-form-item label="中文名称" required prop="cname">
           <el-input v-model="addFormData.cname" style="width: 60%" />
         </el-form-item>
-        <el-form-item label="级别" required prop="weight">
+        <el-form-item label="排序级别" required prop="weight">
           <el-input v-model="addFormData.weight" style="width: 60%" type="number" />
         </el-form-item>
         <el-form-item label="通知媒介" required prop="provider">

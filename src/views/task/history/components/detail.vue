@@ -58,14 +58,14 @@
                     <i class="el-icon-alarm-clock" />
                     创建时间
                   </template>
-                  {{ taskHistoryDetail.create_at }}
+                  {{ taskHistoryDetail.created_at }}
                 </el-descriptions-item>
                 <el-descriptions-item>
                   <template slot="label">
                     <i class="el-icon-timer" />
                     完成时间
                   </template>
-                  {{ taskHistoryDetail.update_at }}
+                  {{ taskHistoryDetail.updated_at }}
                 </el-descriptions-item>
                 <el-descriptions-item>
                   <template slot="label">
@@ -215,8 +215,6 @@ export default {
         } else {
           jsonResult = { return: '任务调度中' }
         }
-
-        // console.log('1', jsonResult)
 
         // this.text(this.resultYaml)
         // this.resultYaml = 123;

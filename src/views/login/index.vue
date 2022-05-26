@@ -223,7 +223,6 @@ export default {
       })
     },
     handleLogin() {
-      console.log(process.env.VUE_APP_BASE_API)
       this.$refs.loginForm.validate(valid => {
         if (valid) {
           this.loading = true

@@ -63,8 +63,8 @@ export default {
       }
     },
     classifyId: {
-      type: String,
-      default: '0'
+      type: Number,
+      default: 0
     }
   },
   data() {

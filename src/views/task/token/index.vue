@@ -20,11 +20,11 @@
         </tr>
         <tr>
           <td class="column">创建时间</td>
-          <td>{{ data.create_at }}</td>
+          <td>{{ data.created_at }}</td>
         </tr>
         <tr>
           <td class="column">更新时间</td>
-          <td>{{ data.update_at }}</td>
+          <td>{{ data.updated_at }}</td>
         </tr>
       </table>
     </div>

@@ -81,10 +81,10 @@
           <el-timeline-item
             v-for="(item, index) in changeData"
             :key="index"
-            :timestamp="item.create_at"
+            :timestamp="item.created_at"
             placement="top"
           >
-            <div class="year">{{ item.create_at }}</div>
+            <div class="year">{{ item.created_at }}</div>
             <el-card shadow="hover">
               <div class="card-infos">
                 <p style="font-weight:bold;font-size:16px;">{{ item.title }}</p>
@@ -234,7 +234,8 @@ export default {
       })
     },
     goBack() {
-      this.$router.push({ name: 'CmdbAsset' })
+      // this.$router.push({ name: 'CmdbAsset' })
+      this.$router.back()
     }
   }
 }

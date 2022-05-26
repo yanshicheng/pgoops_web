@@ -1,29 +1,26 @@
 <template>
   <div>
-    <el-card class="box-card" shadow="hover">
-      <div>
-        <el-form :inline="true" :model="searchInfo">
+    <el-card class="box-card" style="margin-top: 10px" shadow="hover">
+      <div style="background: #fafafa;border:2px solid #f2f5fa;height: 50px;">
+        <el-form :inline="true" :model="searchInfo" style="margin-left: 15px; margin-top: 7px">
           <el-form-item label="模糊搜索">
             <el-input v-model="searchInfo.search" style="width: 230px" placeholder="请输入搜索内容" />
           </el-form-item>
 
-          <el-form-item style="float:right ">
-            <el-button size="mini" type="primary" icon="el-icon-search" @click="getSearchData">查询</el-button>
-            <el-button size="mini" icon="el-icon-refresh" @click="searchOnReset">重置</el-button>
+          <el-form-item>
+            <el-button icon="el-icon-refresh" @click="searchOnReset">重置</el-button>
+
+            <el-button type="primary" icon="el-icon-search" @click="getSearchData">查询</el-button>
+            <el-button type="primary" icon="el-icon-plus" @click="addData('create')">新增</el-button>
           </el-form-item>
         </el-form>
-      </div>
-    </el-card>
-
-    <el-card class="box-card" style="margin-top: 10px" shadow="hover">
-      <div style="margin-bottom: 20px">
-        <el-button @click="addData('create')">新增</el-button>
       </div>
       <el-table
         ref="multipleTable"
         :data="dataList"
         border
-        :cell-style="{textAlign:&quot;center&quot;}"
+        :cell-style="{textAlign:'center'}"
+        :max-height="tableHeight"
         :header-cell-style="{textAlign: 'center',background:'#fafafa',color:'#606266'}"
         tooltip-effect="dark"
         style="width: 100%"
@@ -87,10 +84,10 @@
             <!--            <el-button size="mini" type="" @click="infodata(row)">-->
             <!--              详情-->
             <!--            </el-button>-->
-            <el-button size="mini" type="success" @click="infoFormFunc(row)">
+            <el-button size="mini" type="text" icon="el-icon-view" @click="infoFormFunc(row)">
               详情
             </el-button>
-            <el-button size="mini" type="danger" @click="deleteData(row)">
+            <el-button size="mini" type="text" icon="el-icon-delete" @click="deleteData(row)">
               删除
             </el-button>
           </template>
@@ -105,7 +102,7 @@
         :page-size="pageQuerylist.limit"
         layout="total, sizes, prev, pager, next, jumper"
         @size-change="handleSizeChange"
-        @current-change="handleCurrentChange"
+        @current-change="handlePageChange"
       />
       <AddTableData
         :show-visible.sync="addDialogFormVisible"
@@ -165,6 +162,7 @@ export default {
       // 表格多选相关
       tableChangeList: [],
       dataList: [],
+      tableHeight: window.innerHeight - 290,
       // 搜索相关
       pageQuerylist: JSON.parse(JSON.stringify(getPageQueryList())),
       searchInfo: {
@@ -176,7 +174,7 @@ export default {
     }
   },
   created() {
-    this.GetList()
+    this.getList()
   },
   methods: {
     infoFormFunc(row) {
@@ -186,7 +184,7 @@ export default {
       this.methodVisible = 'create'
       this.addDialogFormVisible = false
       this.addRowData = JSON.parse(JSON.stringify(defaultAddData))
-      this.GetList()
+      this.getList()
     },
     deleteData(row) {
       this.$confirm('正在删除任务调度, 此操作不可逆，是否继续?', '提示', {
@@ -195,7 +193,7 @@ export default {
         type: 'warning'
       }).then(() => {
         masterApi.delete(row.id).then(() => {
-          this.GetList()
+          this.getList()
           this.$message({
             type: 'success',
             message: '调度任务删除已提交!'
@@ -208,8 +206,12 @@ export default {
         })
       })
     },
-    GetList() {
+    getList() {
       masterApi.list({
+        from_periodic_null: this.searchInfo.from_periodic_null,
+        repository: this.searchInfo.repository,
+        state: this.searchInfo.state,
+        search: this.searchInfo.search,
         page: this.pageQuerylist.page,
         size: this.pageQuerylist.size
       }).then(response => {
@@ -238,30 +240,15 @@ export default {
     handleSizeChange(val) {
       this.pageQuerylist.size = val
       this.pageQuerylist.page = 1
-      this.getSearchDataVal()
+      this.getList()
     },
-    handleCurrentChange(val) {
+    handlePageChange(val) {
       this.pageQuerylist.page = val
-      this.getSearchDataVal()
+      this.getList()
     },
-    getSearchDataVal() {
-      const params = {
-        from_periodic_null: this.searchInfo.from_periodic_null,
-        repository: this.searchInfo.repository,
-        state: this.searchInfo.state,
-        search: this.searchInfo.search,
-        page: this.pageQuerylist.page,
-        size: this.pageQuerylist.size
-      }
-      masterApi.list(params).then((res) => {
-        this.dataList = res.data.result ? res.data.result : res.data
-        this.pageQuerylist.total = res.data.count
-      })
-    },
-
     getSearchData() {
       this.pageQuerylist.page = 1
-      this.getSearchDataVal()
+      this.getList()
     }
   }
 }

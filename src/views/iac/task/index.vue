@@ -1,10 +1,10 @@
 <template>
   <div>
-    <el-card class="box-card" shadow="hover">
+    <el-card class="box-card" style="margin-top: 10px" shadow="hover">
       <div>
-        <el-form ref="searchForm" :inline="true" :model="searchInfo">
+        <el-form ref="searchForm" :inline="true" :model="searchInfo" style="margin-left: 15px; margin-top: 7px">
           <el-form-item label="模糊搜索">
-            <el-input v-model="searchInfo.search" style="width: 230px" placeholder="请输入搜索内容"/>
+            <el-input v-model="searchInfo.search" style="width: 230px" placeholder="请输入搜索内容" />
           </el-form-item>
           <el-form-item label="执行方法">
             <el-select v-model="searchInfo.from_periodic_null" filterable clearable placeholder="请选择">
@@ -36,23 +36,25 @@
               />
             </el-select>
           </el-form-item>
-          <el-form-item style="float:right ">
-            <el-button size="mini" type="primary" icon="el-icon-search" @click="getSearchData">查询</el-button>
-            <el-button size="mini" icon="el-icon-refresh" @click="searchOnReset">重置</el-button>
+          <el-form-item>
+            <el-button icon="el-icon-refresh" @click="searchOnReset">重置</el-button>
+
+            <el-button type="primary" icon="el-icon-search" @click="getSearchData">查询</el-button>
+
           </el-form-item>
         </el-form>
-      </div>
-    </el-card>
 
-    <el-card class="box-card" style="margin-top: 10px" shadow="hover">
-      <div style="margin-bottom: 20px">
-        <el-button @click="addData('create')">新增</el-button>
+      </div>
+      <div style="background: #fafafa;border:2px solid #f2f5fa;height: 50px;">
+        <el-button icon="el-icon-plus" type="primary" @click="addData('create')">新增</el-button>
+
       </div>
       <el-table
         ref="multipleTable"
         :data="dataList"
         border
-        :cell-style="{textAlign:&quot;center&quot;}"
+        :max-height="tableHeight"
+        :cell-style="{textAlign:'center'}"
         :header-cell-style="{textAlign: 'center',background:'#fafafa',color:'#606266'}"
         tooltip-effect="dark"
         style="width: 100%"
@@ -114,18 +116,18 @@
           width="220"
         />
 
-        <el-table-column align="center" class-name="small-padding fixed-width" fixed="right" label="操作" width="230">
+        <el-table-column align="center" class-name="small-padding fixed-width" fixed="right" label="操作" width="260">
           <template slot-scope="{row}">
-            <el-button size="mini" type="success" @click="infoFormFunc(row)">
+            <el-button size="mini" type="text" icon="el-icon-view" @click="infoFormFunc(row)">
               详情
             </el-button>
-            <el-button size="mini" type="warning" @click="addData(row)">
+            <el-button size="mini" type="text" icon="el-icon-refresh-right" @click="addData(row)">
               再次执行
             </el-button>
             <!--            <el-button size="mini" type="warning" @click="downLoadFormFunc(row)">-->
             <!--              下载-->
             <!--            </el-button>-->
-            <el-button size="mini" type="danger" @click="deleteFormFunc(row)">
+            <el-button size="mini" type="text" icon="el-icon-delete" @click="deleteFormFunc(row)">
               删除
             </el-button>
           </template>
@@ -156,12 +158,12 @@
 </template>
 
 <script>
-import {Task as masterApi} from '@/api/iac'
-import {REPOSITORY as repositoryApi} from '@/api/iac'
+import { Task as masterApi } from '@/api/iac'
+import { REPOSITORY as repositoryApi } from '@/api/iac'
 import RunTableData from './components/run'
 // import MainDetail from './components/mainDetail'
 import moment from 'moment'
-import {getPageQueryList} from '@/utils/page-query'
+import { getPageQueryList } from '@/utils/page-query'
 
 const defaultSearchInfo = {
   type: '',
@@ -194,7 +196,7 @@ export default {
     // MainDetail
   },
   filters: {
-    formatDate: function (date) {
+    formatDate: function(date) {
       return moment.utc(date).format('YYYY-MM-DD HH:mm:ss')
     }
   },
@@ -207,6 +209,7 @@ export default {
       // 表格多选相关
       tableChangeList: [],
       dataList: [],
+      tableHeight: window.innerHeight - 290,
       // 搜索相关
       pageQuerylist: JSON.parse(JSON.stringify(getPageQueryList())),
       searchInfo: JSON.parse(JSON.stringify(defaultSearchInfo)),
@@ -255,7 +258,7 @@ export default {
       })
     },
     infoFormFunc(row) {
-      this.$router.push({name: 'IAC_TASK_DETAIL', query: {id: row.id}})
+      this.$router.push({ name: 'IAC_TASK_DETAIL', query: { id: row.id }})
     },
     onSubmit() {
     },
