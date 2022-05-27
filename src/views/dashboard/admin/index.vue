@@ -3,7 +3,7 @@
     <iframe id="omp_iframe" ref="iframe" :src="monitorUrl" width="100%" :style="iframeStyle()" frameBorder="0" />
   </div>
   <div v-else>
-    <span>Grafana连接错误！</span>
+    <span>{{ msg }}</span>
   </div>
 </template>
 
@@ -14,7 +14,8 @@ export default {
   data() {
     return {
       monitorUrl: '',
-      showVisible: false
+      showVisible: false,
+      msg: ''
     }
   },
   created() {
@@ -24,7 +25,8 @@ export default {
     getList() {
       masterApi.service_monitor().then(res => {
         this.monitorUrl = res.data.url
-        this.showVisible = true
+        this.showVisible = res.data.status
+        this.msg   = res.data.msg
       })
     },
     widhtDrawer() {
