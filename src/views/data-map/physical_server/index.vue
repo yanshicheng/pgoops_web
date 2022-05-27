@@ -73,6 +73,7 @@
     <DrawerMonitor
       :show-visible.sync="monitorVisible"
       :monitor-url="monitorUrl"
+      :monitor-status="monitorStatus"
       :monitor-title="monitorTitle"
     />
   </div>
@@ -94,6 +95,7 @@ export default {
   },
   data() {
     return {
+      monitorStatus: '',
       classifyId: 0,
       monitorTitle: '',
       monitorUrl: '',
@@ -159,6 +161,7 @@ export default {
       })
       masterApi.monitor(row.id).then(res => {
         this.monitorUrl = res.data.url
+        this.monitorStatus = res.data.status
         this.monitorTitle = res.data.title
         loading.close()
         this.monitorVisible = true

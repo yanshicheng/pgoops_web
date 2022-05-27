@@ -151,6 +151,7 @@
     <DrawerMonitor
       :show-visible.sync="monitorVisible"
       :monitor-url="monitorUrl"
+      :monitor-status="monitorStatus"
       :monitor-title="monitorTitle"
     />
   </el-card>
@@ -183,6 +184,7 @@ export default {
     return {
       monitorTitle: '',
       monitorUrl: '',
+      monitorStatus: '',
       monitorVisible: false,
       assetName: '',
       groupList: [],
@@ -274,6 +276,7 @@ export default {
       })
       masterApi.monitor(row.id).then(res => {
         this.monitorUrl = res.data.url
+        this.monitorStatus = res.data.status
         this.monitorTitle = res.data.title
         loading.close()
         this.monitorVisible = true

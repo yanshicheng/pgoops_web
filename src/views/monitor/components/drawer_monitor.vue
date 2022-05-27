@@ -9,8 +9,11 @@
     :close-on-press-escape="false"
     :before-close="handleClose"
   >
-    <div v-if="showVisible" id="omp_iframe_container" :style="divIframeStyle">
-      <iframe id="omp_iframe" ref="iframe" :src="monitorUrl" width="100%" :style="iframeStyle()" frameBorder="0" />
+    <div v-if="monitorStatus" id="omp_iframe_container" :style="divIframeStyle">
+      <iframe id="omp_iframe" ref="iframe" :src="monitorUrl" width="100%" :style="iframeStyle()" frameBorder="0"/>
+    </div>
+    <div v-else>
+      <span>{{ monitorUrl }}</span>
     </div>
   </el-drawer>
 
@@ -18,7 +21,7 @@
 
 <script>
 
-import { REPOSITORY as masterApi } from '@/api/iac'
+import {REPOSITORY as masterApi} from '@/api/iac'
 
 const defaultaddFormData = {
   project_name: '',
@@ -31,6 +34,10 @@ export default {
       type: Boolean,
       default:
         false
+    },
+    monitorStatus: {
+      type: Boolean,
+      default: false
     },
     monitorUrl: {
       type: String,
@@ -53,18 +60,18 @@ export default {
       title: '新增项目',
       rules: {
         name: [
-          { required: true, message: '任务标题', trigger: 'blur' },
-          { min: 2, max: 24, message: '长度在 2 到 24 个字符', trigger: 'blur' }
+          {required: true, message: '任务标题', trigger: 'blur'},
+          {min: 2, max: 24, message: '长度在 2 到 24 个字符', trigger: 'blur'}
         ],
         target: [
-          { required: true, message: '请输入执行目标', trigger: 'blur' },
-          { min: 1, max: 120, message: '长度在 1 到 120 个字符', trigger: 'blur' }
+          {required: true, message: '请输入执行目标', trigger: 'blur'},
+          {min: 1, max: 120, message: '长度在 1 到 120 个字符', trigger: 'blur'}
         ],
         module: [
-          { required: true, message: '请选择执行模块', trigger: 'change' }
+          {required: true, message: '请选择执行模块', trigger: 'change'}
         ],
         method: [
-          { required: true, message: '请选择模块方法', trigger: 'change' }
+          {required: true, message: '请选择模块方法', trigger: 'change'}
         ]
 
       },
@@ -126,7 +133,7 @@ export default {
       this.drawerFileList = fileList
     },
     uploadFileDrawer(params) {
-      this.tmpFile = { 'code_package': params.file }
+      this.tmpFile = {'code_package': params.file}
     },
     closeForm(formName) {
       this.addFormData = JSON.parse(JSON.stringify(defaultaddFormData))
@@ -232,6 +239,7 @@ export default {
   display: none;
   z-index: -9999;
 }
+
 ::v-deep .el-drawer__close-btn {
   position: fixed;
   border: none;
@@ -241,20 +249,23 @@ export default {
   color: inherit;
   background-color: transparent;
 }
+
 ::v-deep .el-drawer__header > :first-child {
   -webkit-box-flex: 1;
   -ms-flex: 1;
   flex: 1;
   margin-left: 35px;
 }
-::v-deep  .el-drawer__header {
+
+::v-deep .el-drawer__header {
   display: flex;
   align-items: center;
-  color: rgba(0,0,0,.85);
+  color: rgba(0, 0, 0, .85);
   font-weight: 500;
   font-size: 22px;
   line-height: 22px;
 }
+
 .drop {
   border: 2px dashed #bbb;
   width: 600px;
