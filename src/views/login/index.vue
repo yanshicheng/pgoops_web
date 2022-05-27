@@ -197,9 +197,11 @@ export default {
       this.$message({
         showClose: true,
         dangerouslyUseHTMLString: true,
-        duration: 30000,
+        duration: 10000,
         message: '<div><span style="font-weight: bold;">管理用户 :</span> <span style="font-weight: bold;">super</span><span style="font-weight: bold;margin-left: 10px">密码 :</span> <span style="font-weight: bold;">123456</span></div>' +
-          '<div style="margin-top: 10px"><span style="font-weight: bold;">普通用户 :</span> <span style="font-weight: bold;"> edit&nbsp;&nbsp; </span><span style="font-weight: bold;margin-left: 10px">密码 :</span> <span style="font-weight: bold;">123456</span></div>'
+          '<div style="margin-top: 10px"><span style="font-weight: bold;">普通用户 :</span> <span style="font-weight: bold;"> edit&nbsp;&nbsp; </span><span style="font-weight: bold;margin-left: 10px">密码 :</span> <span style="font-weight: bold;">123456</span></div>' +
+          '<div style="margin-top: 10px"><span style="font-weight: bold;">GitHub :</span> <span style="font-weight: bold;"> https://github.com/yanshicheng&nbsp;&nbsp; </span></div>'
+
       })
     },
     denglu() {
